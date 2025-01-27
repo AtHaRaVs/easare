@@ -10,7 +10,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://easare-43ygdcnvt-atharavs-projects-a8c2660a.vercel.app",
+      "https://easare-nrqyvgbxx-atharavs-projects-a8c2660a.vercel.app/",
     ], // Add your deployed URL
     credentials: true, // If you're using cookies or HTTP authentication
   })
