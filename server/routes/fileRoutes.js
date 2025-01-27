@@ -30,6 +30,12 @@ const upload = multer({ storage });
 router.post("/upload", upload.single("file"), async (req, res) => {
   try {
     // Upload file to Cloudinary
+    res.setHeader(
+      "Access-Control-Allow-Origin",
+      "https://easare-53pkx5nh3-atharavs-projects-a8c2660a.vercel.app"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+
     const result = await cloudinary.uploader.upload(req.file.path, {
       resource_type: "auto",
       folder: "temp-files",
