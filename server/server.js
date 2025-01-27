@@ -8,11 +8,18 @@ dotenv.config();
 const app = express();
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://easare-nrqyvgbxx-atharavs-projects-a8c2660a.vercel.app",
-    ], // Add your deployed URL
-    credentials: true, // If you're using cookies or HTTP authentication
+    origin: (origin, callback) => {
+      const allowedOrigins = [
+        "http://localhost:5173",
+        "https://easare.vercel.app",
+      ];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
   })
 );
 app.use(express.json());
