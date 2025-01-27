@@ -6,22 +6,17 @@ const fileRoutes = require("./routes/fileRoutes");
 
 dotenv.config();
 const app = express();
+
 app.use(
   cors({
-    origin: (origin, callback) => {
-      const allowedOrigins = [
-        "http://localhost:5173",
-        "https://easare.vercel.app",
-      ];
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: [
+      "http://localhost:5173", // For local development
+      "https://easare-84s5ykdm3-atharavs-projects-a8c2660a.vercel.app", // Your deployed frontend URL
+    ],
     credentials: true,
   })
 );
+
 app.use(express.json());
 
 require("./utils/node-cron");
