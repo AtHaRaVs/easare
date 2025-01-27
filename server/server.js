@@ -9,11 +9,10 @@ const app = express();
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173", // For local development
-      "https://easare-84s5ykdm3-atharavs-projects-a8c2660a.vercel.app", // Your deployed frontend URL
-    ],
-    credentials: true,
+    origin: "https://easare.vercel.app/", // Allow this origin only
+    credentials: true, // Allow cookies, authorization headers with requests
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
   })
 );
 
