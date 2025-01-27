@@ -2,14 +2,21 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/files/upload.js", // Path to your serverless function
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    },
+    {
+      "src": "server/server.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/files/upload",
-      "dest": "/api/files/upload.js"
+      "src": "/(.*)",
+      "dest": "/client/$1"
     }
   ]
 }
