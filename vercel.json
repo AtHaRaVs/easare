@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/files/upload.js", // Path to your serverless function
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/files/upload",
+      "dest": "/api/files/upload.js"
+    }
+  ]
+}
