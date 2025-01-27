@@ -20,7 +20,7 @@ app.use(express.json());
 
 require("./utils/node-cron");
 
-app.use("/api/files", fileRoutes);
+app.use("/", fileRoutes);
 
 const connectDB = async () => {
   try {
