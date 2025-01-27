@@ -6,11 +6,13 @@ const fileRoutes = require("./routes/fileRoutes");
 
 dotenv.config();
 const app = express();
-
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    credentials: true,
+    origin: [
+      "http://localhost:5173",
+      "https://easare-43ygdcnvt-atharavs-projects-a8c2660a.vercel.app",
+    ], // Add your deployed URL
+    credentials: true, // If you're using cookies or HTTP authentication
   })
 );
 app.use(express.json());
