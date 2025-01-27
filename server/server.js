@@ -9,7 +9,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://easare.vercel.app/", // Allow this origin only
+    origin: "https://easare.vercel.app", // Allow this origin only
     credentials: true, // Allow cookies, authorization headers with requests
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
