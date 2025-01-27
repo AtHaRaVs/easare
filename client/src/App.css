@@ -1,42 +1,68 @@
+/* index.css or app.css */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* index.css or app.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Ensure this in your app.css or index.css */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ensures full viewport height */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* For the new "Open File in New Tab" and "Copy Link" buttons */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-.card {
-  padding: 2em;
+.open-file-button,
+.copy-link-button {
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 48%;
 }
 
-.read-the-docs {
-  color: #888;
+.open-file-button {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+}
+
+.open-file-button:hover {
+  background: linear-gradient(135deg, #2575fc, #6a11cb);
+}
+
+.copy-link-button {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+}
+
+.copy-link-button:hover {
+  background: linear-gradient(135deg, #2575fc, #6a11cb);
+}
+
+.file-url-container h3 {
+  margin-bottom: 10px;
 }
