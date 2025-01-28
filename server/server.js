@@ -7,12 +7,11 @@ const fileRoutes = require("./routes/fileRoutes");
 dotenv.config();
 const app = express();
 
+const cors = require("cors");
 app.use(
   cors({
-    origin: "https://easare.vercel.app", // Allow this origin only
-    credentials: true, // Allow cookies, authorization headers with requests
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+    origin: "https://easare-iz1b8bjde-atharavs-projects-a8c2660a.vercel.app",
+    credentials: true,
   })
 );
 
@@ -20,7 +19,7 @@ app.use(express.json());
 
 require("./utils/node-cron");
 
-app.use("/", fileRoutes);
+app.use("/api/files", fileRoutes);
 
 const connectDB = async () => {
   try {

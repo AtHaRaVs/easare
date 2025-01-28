@@ -27,11 +27,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Your upload route
-router.post("/", upload.single("file"), async (req, res) => {
+router.post("/upload", upload.single("file"), async (req, res) => {
   try {
     // Upload file to Cloudinary
-    res.setHeader("Access-Control-Allow-Origin", "https://easare.vercel.app");
-    res.setHeader("Access-Control-Allow-Credentials", "true");
 
     const result = await cloudinary.uploader.upload(req.file.path, {
       resource_type: "auto",
