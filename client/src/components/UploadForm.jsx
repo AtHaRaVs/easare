@@ -25,7 +25,7 @@ const UploadForm = () => {
 
     try {
       const response = await axios.post(
-        "https://easare.vercel.app", // Replace with your backend API
+        "https://easare.onrender.com/api/files/upload", // Correct the URL to match your backend endpoint
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
