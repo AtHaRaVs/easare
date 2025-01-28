@@ -7,12 +7,26 @@ const fileRoutes = require("./routes/fileRoutes");
 dotenv.config();
 const app = express();
 
-app.use(
-  cors({
-    origin: "https://easare-iz1b8bjde-atharavs-projects-a8c2660a.vercel.app",
-    credentials: true,
-  })
-);
+const allowedOrigins = [
+  "https://easare.vercel.app", // Frontend deployed on Vercel
+  "https://easare-iz1b8bjde-atharavs-projects-a8c2660a.vercel.app", // Your other frontend URL
+  // Add any additional allowed origins here
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true); // Allow request
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true, // Allow credentials (cookies, etc.)
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
