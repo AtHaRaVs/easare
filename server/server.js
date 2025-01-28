@@ -7,7 +7,6 @@ const fileRoutes = require("./routes/fileRoutes");
 dotenv.config();
 const app = express();
 
-const cors = require("cors");
 app.use(
   cors({
     origin: "https://easare-iz1b8bjde-atharavs-projects-a8c2660a.vercel.app",
