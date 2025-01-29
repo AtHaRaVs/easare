@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { saveAs } from "file-saver";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,6 +11,11 @@ const UploadForm = () => {
   const [cookies, setCookie] = useCookies(["uploadStatus", "fileUrl"]);
   const [loading, setLoading] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState("");
+
+  useEffect(() => {
+    setCookie("uploadStatus", "", { path: "/", expires: new Date(0) });
+    setCookie("fileUrl", "", { path: "/", expires: new Date(0) });
+  }, []);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -58,6 +63,11 @@ const UploadForm = () => {
         // Assuming your server responds with the file URL in response.data.fileUrl
         setCookie("uploadStatus", "success", { path: "/" });
         setCookie("fileUrl", response.data.fileUrl, { path: "/" }); // Save the Cloudinary file URL
+
+        setTimeout(() => {
+          setCookie("uploadStatus", "", { path: "/", expires: new Date(0) });
+          setCookie("fileUrl", "", { path: "/", expires: new Date(0) });
+        }, 10000);
       } else {
         // Trigger error toast if there's any issue in the response
         toast.error("Something went wrong!");
