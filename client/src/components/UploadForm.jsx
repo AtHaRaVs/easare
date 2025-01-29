@@ -58,7 +58,6 @@ const UploadForm = () => {
         // Assuming your server responds with the file URL in response.data.fileUrl
         setCookie("uploadStatus", "success", { path: "/" });
         setCookie("fileUrl", response.data.fileUrl, { path: "/" }); // Save the Cloudinary file URL
-        setLoadingMessage("🔗 Generating secure link...");
       } else {
         // Trigger error toast if there's any issue in the response
         toast.error("Something went wrong!");
