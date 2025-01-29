@@ -66,7 +66,6 @@ const UploadForm = () => {
 
         setTimeout(() => {
           setCookie("uploadStatus", "", { path: "/", expires: new Date(0) });
-          setCookie("fileUrl", "", { path: "/", expires: new Date(0) });
         }, 10000);
       } else {
         // Trigger error toast if there's any issue in the response
