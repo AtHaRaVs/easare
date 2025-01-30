@@ -1,25 +1,31 @@
 const cron = require("node-cron");
-const cloudinary = require("cloudinary");
-const file = require("../models/file");
+const cloudinary = require("cloudinary").v2;
+const File = require("../models/file"); // Ensure correct model import
 
-cron.schedule("0 0 * * * ", async () => {
+cron.schedule("0 0 * * *", async () => {
   console.log("Running cleanup job at midnight");
 
   try {
-    const expiredFiles = await file.find({
+    const expiredFiles = await File.find({
       createdAt: { $lte: new Date(Date.now() - 24 * 60 * 60 * 1000) },
     });
 
     for (const file of expiredFiles) {
-      const publicId = file.url.split("/").pop().split(".")[0];
-      await cloudinary.uplaoder.destroy(`temp-files/${publicId}`);
+      // Extract public ID correctly
+      const match = file.url.match(/\/upload\/v\d+\/(.+)\.\w+$/);
+      const publicId = match ? match[1] : null;
 
-      await file.deleteOne({ _id: file._id });
-      console.log(
-        `Deleted file: ${file.filename} from Cloudinary and database.`
-      );
+      if (publicId) {
+        await cloudinary.uploader.destroy(publicId);
+        console.log(`Deleted file from Cloudinary: ${file.filename}`);
+      } else {
+        console.log(`Failed to extract publicId for file: ${file.filename}`);
+      }
+
+      await File.deleteOne({ _id: file._id });
+      console.log(`Deleted file record from database: ${file.filename}`);
     }
   } catch (err) {
-    console.log("Error in cleanup Job", err.message);
+    console.error("Error in cleanup job:", err.message);
   }
 });
