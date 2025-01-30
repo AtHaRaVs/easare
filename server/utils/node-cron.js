@@ -12,7 +12,7 @@ cron.schedule("0 0 * * *", async () => {
 
     for (const file of expiredFiles) {
       // Extract public ID correctly
-      const match = file.url.match(/\/upload\/v\d+\/(.+)\.\w+$/);
+      await cloudinary.uploader.destroy(`temp-files/${publicId}`);
       const publicId = match ? match[1] : null;
 
       if (publicId) {
