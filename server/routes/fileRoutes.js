@@ -35,7 +35,6 @@ router.get("/generateToken", (req, res) => {
 // Your upload route
 router.post(
   "/upload",
-  generateToken,
   validateToken,
   upload.single("file"),
   async (req, res) => {
