@@ -34,11 +34,29 @@ const UploadForm = () => {
     formData.append("file", file);
 
     try {
+      const tokenResponse = await axios.get(
+        "https://easare.onrender.com/api/files/generateToken",
+        {
+          withCredentials: true,
+        }
+      );
+
+      if (tokenResponse.status !== 200 || !tokenResponse.data.token) {
+        toast.error("Failed to fetch upload token!");
+        setLoading(false);
+        return;
+      }
+
+      const token = tokenResponse.data.token;
+
       const response = await axios.post(
         "https://easare.onrender.com/api/files/upload", // Replace with your backend API
         formData,
         {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "x-upload-token": token,
+          },
           withCredentials: true, // Ensure cookies are sent with the request
           onUploadProgress: (progressEvent) => {
             const percentCompleted = Math.round(
