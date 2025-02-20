@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const fileRoutes = require("./routes/fileRoutes");
-const cloudinary = require("cloudinary").v2;
 
 dotenv.config();
 const app = express();
@@ -34,25 +33,6 @@ app.use(express.json());
 require("./utils/node-cron");
 
 app.use("/api/files", fileRoutes);
-
-// ****************************************************************************************8
-const deleteFile = async () => {
-  try {
-    console.log("Attempting to delete file...");
-
-    const publicId = "temp-files/gmai8dbrk2oiozjomwpi";
-
-    console.log("Cloudinary request started...");
-    const result = await cloudinary.uploader.destroy(publicId);
-
-    console.log("Cloudinary Response:", result);
-  } catch (error) {
-    console.error("Cloudinary Error:", error);
-  }
-};
-
-deleteFile();
-// ****************************************************************************************8
 
 const connectDB = async () => {
   try {
