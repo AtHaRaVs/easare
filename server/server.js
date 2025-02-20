@@ -34,6 +34,21 @@ require("./utils/node-cron");
 
 app.use("/api/files", fileRoutes);
 
+// ****************************************************************************************8
+const deleteFile = async () => {
+  const publicId = "temp-files/gmai8dbrk2oiozjomwpi";
+
+  try {
+    const result = await cloudinary.uploader.destroy(publicId);
+    console.log("Cloudinary Response:", result);
+  } catch (error) {
+    console.error("Error deleting file:", error);
+  }
+};
+
+deleteFile();
+// ****************************************************************************************8
+
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI, {
