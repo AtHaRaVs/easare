@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const fileRoutes = require("./routes/fileRoutes");
+const cloudinary = require("cloudinary").v2;
 
 dotenv.config();
 const app = express();
