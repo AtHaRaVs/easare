@@ -36,13 +36,17 @@ app.use("/api/files", fileRoutes);
 
 // ****************************************************************************************8
 const deleteFile = async () => {
-  const publicId = "temp-files/gmai8dbrk2oiozjomwpi";
-
   try {
+    console.log("Attempting to delete file...");
+
+    const publicId = "temp-files/gmai8dbrk2oiozjomwpi";
+
+    console.log("Cloudinary request started...");
     const result = await cloudinary.uploader.destroy(publicId);
+
     console.log("Cloudinary Response:", result);
   } catch (error) {
-    console.error("Error deleting file:", error);
+    console.error("Cloudinary Error:", error);
   }
 };
 
